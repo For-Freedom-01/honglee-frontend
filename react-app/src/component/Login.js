@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import {useNavigate } from "react-router-dom"
+import {Link, useNavigate } from "react-router-dom"
 
 export default function Login(){
   const refId = useRef(null)
@@ -13,11 +13,14 @@ export default function Login(){
     const id = refId.current.value.trim()
     const password = refPassword.current.value.trim()
     console.log(id,password)
-    await fetch(`http://localhost:3001/0?id=${id}&password=${password}`)
+    await fetch(`http://localhost:3001/userInfo?id=${id}&password=${password}`)
     .then(data=> {
       if (!data.ok) {
         window.alert("id 또는 password를 확인해 주세요")
-      } else {
+      } else if (data.length === 0) {
+        window.alert("id 또는 password를 확인해 주세요")
+      }else {
+        console.log("res",data)
         window.alert("로그인에 성공하셨습니다")
         nav('/')
       }
@@ -46,6 +49,7 @@ export default function Login(){
       </div>
       <button>Login</button>
     </form>
+    <Link to="/find_id">아이디 찾기</Link>
     </>
   )
 }

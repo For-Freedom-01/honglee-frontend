@@ -1,6 +1,18 @@
-[
-  {
-    "id":"user123",
-    "password": "1234"
-  }
-]
+{
+  "userInfo": [
+    {
+      "id": "user001",
+      "password": "1234",
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "lastLogin": "2025-01-19T00:00:00Z"
+    },
+    {
+      "id": "user002",
+      "password": "1234",
+      "name": "Jane Doe",
+      "email": "janedoe@example.com",
+      "lastLogin": "2025-01-18T15:30:00Z"
+    }
+  ]
+}
