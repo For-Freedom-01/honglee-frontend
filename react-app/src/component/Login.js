@@ -49,7 +49,7 @@ export default function Login(){
       </div>
       <button>Login</button>
     </form>
-    <Link to="/find_id">아이디 찾기</Link>
+    <Link to="/find_id">아이디 찾기</Link> | <Link to="/find_password">비밀번호 찾기</Link>
     </>
   )
 }
