@@ -1,31 +1,39 @@
 import { useRef } from "react"
 import {Link, useNavigate } from "react-router-dom"
+import axios from "axios"
 
 export default function Login(){
-  const refId = useRef(null)
-  const refPassword = useRef(null)
+  const refId = useRef("")
+  const refPassword = useRef("")
   const nav = useNavigate()
-  
-
   
   async function onLogin(e){
     e.preventDefault()
     const id = refId.current.value.trim()
     const password = refPassword.current.value.trim()
     console.log(id,password)
-    await fetch(`http://localhost:3001/userInfo?id=${id}&password=${password}`)
-    .then(data=> {
-      if (!data.ok) {
-        window.alert("id 또는 password를 확인해 주세요")
-      } else if (data.length === 0) {
-        window.alert("id 또는 password를 확인해 주세요")
-      }else {
-        console.log("res",data)
+    try{
+      const response = await axios.post(`http://localhost:3001/userInfo`,{
+        ID:id,
+        password:password
+      },{
+        headers:{
+          "Content-Type": "application/json"
+        },
+        withCredentials:true,
+      })
+
+      const { data } = response
+      if (!data.success) {
+        window.alert("ID 또는 비밀번호를 확인해 주세요")
+      } else {
         window.alert("로그인에 성공하셨습니다")
-        nav('/')
+        nav("/")
       }
-    })
-    .catch(error => console.log(error))
+  } catch(error){
+  window.alert("로그인 중 문제가 발생했습니다")
+  console.log(error)
+  }
   }
   return(
     <>
