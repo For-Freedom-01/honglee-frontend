@@ -3,6 +3,7 @@ import {Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 
 export default function Login(){
+
   const refId = useRef("")
   const refPassword = useRef("")
   const nav = useNavigate()
@@ -35,6 +36,14 @@ export default function Login(){
   console.log(error)
   }
   }
+
+  function kakaoLogin(){
+    window.Kakao.init(process.env.REACT_APP_KAKAO_KEY)
+    window.Kakao.Auth.authorize({
+      redirectUri: "http://localhost:3000/kakao_login",
+    })
+  }
+
   return(
     <>
     <h2>Login page</h2>
@@ -57,7 +66,11 @@ export default function Login(){
       </div>
       <button>Login</button>
     </form>
-    <Link to="/find_id">아이디 찾기</Link> | <Link to="/find_password">비밀번호 찾기</Link>
+      <button onClick={kakaoLogin}>카카오 로그인</button>
+      <button>google 로그인인</button><br/>
+    <Link to="/find_id">아이디 찾기</Link> | <Link to="/find_password">비밀번호 찾기</Link><br/>
+    <Link to="/signup">회원 가입</Link>
+
     </>
   )
 }
