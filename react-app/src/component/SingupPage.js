@@ -32,7 +32,7 @@ export default function SingupPage(){
 
   // 필수 옵션을 선택했을 경우에만 제출 버튼을 누를 수 있게 설정정
   const canSubmit = state.overAge && state.store
-  
+
   function agreeSubmit(e){
     e.preventDefault()
     nav("/signup_form")
@@ -57,7 +57,7 @@ export default function SingupPage(){
       <p>광고성 정보 수신 동의의(선택)</p>
       <Link to="./agree_marketing" target="_blank"><p>자세히</p></Link>
       <p>정보주체의 개인정보 및 권리 보호를 위해 「개인정보 보호법」 및 관계 법령이 정한 바를 준수하여 안전하게 관리하고 있습니다.</p>
-      <p>자세한 사항은 <Link target="_blank">개인정보처리방침</Link>에서 확인할 수 있습니다</p>
+      <p>자세한 사항은 <Link to ="./agree_personinfo" target="_blank">개인정보처리방침</Link>에서 확인할 수 있습니다</p>
       <button disabled={!canSubmit}>동의하고 본인인증하기</button>
     </form>
     </>
