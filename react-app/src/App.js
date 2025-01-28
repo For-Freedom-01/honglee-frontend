@@ -10,6 +10,7 @@ import SingupPage from "./component/SingupPage";
 import AgreeStore from "./component/agree/AgreeStore";
 import AgreeAd from "./component/agree/AgreeAd";
 import AgreeMarketing from "./component/agree/AgreeMarketing";
+import SingupForm from "./component/SignupForm";
 function App() {
   return (
     <div className="App" >
@@ -26,6 +27,7 @@ function App() {
               <Route path="signup/agree_store" element={<AgreeStore/>}/>
               <Route path="signup/agree_ad" element={<AgreeAd/>}/>
               <Route path="signup/agree_marketing" element={<AgreeMarketing/>}/>
+              <Route path="signup/signupForm" element={<SingupForm/>}/>
 
 
 
