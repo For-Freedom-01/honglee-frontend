@@ -35,7 +35,7 @@ export default function SingupPage(){
 
   function agreeSubmit(e){
     e.preventDefault()
-    nav("/signup_form")
+    nav("signupForm")
   }
   return(
     <>
