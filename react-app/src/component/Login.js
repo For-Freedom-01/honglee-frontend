@@ -14,7 +14,7 @@ export default function Login(){
     const password = refPassword.current.value.trim()
     console.log(id,password)
     try{
-      const response = await axios.post(`http://localhost:3001/userInfo`,{
+      const response = await axios.post(`http://13.209.151.121:8080/userInfo`,{
         ID:id,
         password:password
       },{
