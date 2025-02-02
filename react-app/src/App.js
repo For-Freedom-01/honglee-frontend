@@ -12,7 +12,11 @@ import AgreeAd from "./component/agree/AgreeAd";
 import AgreeMarketing from "./component/agree/AgreeMarketing";
 import SingupForm from "./component/SignupForm";
 import AgreePersonInfo from "./component/agree/AgreePersonInfo";
+import axios from "axios";
 function App() {
+  async function logOut() {
+  
+  }
   return (
     <div className="App" >
       <BrowserRouter>
@@ -20,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>} />
           <Route path="/login" element={<Login/>}/>
+          <Route path="/logout" element={logOut}/>
           <Route path="/find_id" element={<FindIdPage/>}/>
           <Route path="/find_password" element={<FindPasswordPage/>}/>
           <Route path="/:Id/detail_password" element={<DetailPassword/>}/>

@@ -10,7 +10,7 @@ export default function SingupPage(){
     ad:false,
   })
 
-  // 전체 동의를 누를시 모든 checkbox의 옵션들이 선택되게 설정정
+  // 전체 동의를 누를시 모든 checkbox의 옵션들이 선택되게 설정
   function allHandle(){
     const isChecked = !state.allCkeck
     setState({
