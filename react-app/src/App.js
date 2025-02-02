@@ -1,4 +1,4 @@
-import {BrowserRouter,Route,Routes} from "react-router-dom"
+import {BrowserRouter,Route,Routes, useNavigate} from "react-router-dom"
 import Header from "./component/Header";
 import Login from "./component/Login";
 import HomePage from "./component/HomePage";
@@ -12,19 +12,28 @@ import AgreeAd from "./component/agree/AgreeAd";
 import AgreeMarketing from "./component/agree/AgreeMarketing";
 import SingupForm from "./component/SignupForm";
 import AgreePersonInfo from "./component/agree/AgreePersonInfo";
-import axios from "axios";
+import LogOut from "./component/Logout";
+import { useEffect, useState } from "react";
+
 function App() {
-  async function logOut() {
-  
+  const [loginState, setLoginState] = useState()
+  useEffect(()=> {
+    checkLoginStates()
+  },[])
+
+  const checkLoginStates = () => {
+    const token = localStorage.getItem("token")
+    if  (token) {
+      setLoginState(true)
+    }
   }
   return (
     <div className="App" >
       <BrowserRouter>
-        <Header/>
         <Routes>
           <Route path="/" element={<HomePage/>} />
           <Route path="/login" element={<Login/>}/>
-          <Route path="/logout" element={logOut}/>
+          <Route path="/logout" element={<LogOut/>}/>
           <Route path="/find_id" element={<FindIdPage/>}/>
           <Route path="/find_password" element={<FindPasswordPage/>}/>
           <Route path="/:Id/detail_password" element={<DetailPassword/>}/>
@@ -39,6 +48,7 @@ function App() {
 
 
         </Routes>
+        <Header loginState={loginState}/>
       </BrowserRouter>
     </div>
   );
