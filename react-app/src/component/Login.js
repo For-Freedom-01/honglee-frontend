@@ -2,7 +2,7 @@ import { useRef } from "react"
 import {Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 
-export default function Login(){
+export default function Login({setLogin}){
 
   const refId = useRef("")
   const refPassword = useRef("")
@@ -14,20 +14,20 @@ export default function Login(){
     const password = refPassword.current.value.trim()
     console.log(id,password)
     try{
-      const response = await axios.post(`http://13.209.151.121:8080/userInfo`,{
-        ID:id,
-        password:password
+      const response = await axios.post(`https://honglee.duckdns.org/users/login`,{
+        "username":id,
+        "password":password
       },{
         headers:{
           "Content-Type": "application/json"
         },
         withCredentials:true,
       })
-
-      const { data } = response
-      if (!data.success) {
+      if (response.status !== 200) {
         window.alert("ID 또는 비밀번호를 확인해 주세요")
       } else {
+        setLogin(true)
+        sessionStorage.setItem("isLogin","true")
         window.alert("로그인에 성공하셨습니다")
         nav("/")
       }

@@ -9,7 +9,7 @@ export default function Header({loginState}){
       </Link>  
       {loginState ? (
         <Link to="logout">logout</Link>
-      ) : (<Link to="/login">Login</Link>)}
+      ) : (<Link to="/login">Login</Link>)}``
         
     </header>
   )

@@ -56,18 +56,18 @@ export default function SingupForm(){
         const userFriend = formData.friend.trim()
         if (isable()){
             try{
-                const response = await axios.post("http://13.209.151.121:8080//users/join",{
-                    username:userId,
-                    password:userPassword,
-                    passwordCheck:userPasswordCheck,
-                    email:userEmail,
-                    friend:userFriend
+                const response = await axios.post("https://honglee.duckdns.org/users/join",{
+                    "username":userId,
+                    "password":userPassword,
+                    "passwordCheck":userPasswordCheck,
+                    "email":userEmail,
+                    "friend":userFriend
                 },{
                     headers:{
                         "Content-Type":"application/json"
                     }
                 })
-               if (response.ok){
+               if (response.status===200){
                 window.alert("회원가입에 성공하셨습니다")
                 nav("/")
                }

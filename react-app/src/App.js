@@ -1,4 +1,4 @@
-import {BrowserRouter,Route,Routes, useNavigate} from "react-router-dom"
+import {BrowserRouter,Route,Routes} from "react-router-dom"
 import Header from "./component/Header";
 import Login from "./component/Login";
 import HomePage from "./component/HomePage";
@@ -14,26 +14,26 @@ import SingupForm from "./component/SignupForm";
 import AgreePersonInfo from "./component/agree/AgreePersonInfo";
 import LogOut from "./component/Logout";
 import { useEffect, useState } from "react";
+import PrivateRoute from "./hook/PrivateRoute";
 
 function App() {
-  const [loginState, setLoginState] = useState()
-  useEffect(()=> {
-    checkLoginStates()
-  },[])
+  const [isLogin, setLogin] = useState(false)
 
-  const checkLoginStates = () => {
-    const token = localStorage.getItem("token")
-    if  (token) {
-      setLoginState(true)
+  useEffect(() => {
+    const storageLogin = sessionStorage.getItem("isLogin")
+    if (storageLogin === "true") {
+      setLogin(true)
+    } else {
+      setLogin(false)
     }
-  }
+  },[])
+  
   return (
     <div className="App" >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage/>} />
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/logout" element={<LogOut/>}/>
+          <Route path="/login" element={<Login setLogin={setLogin}/>}/>
           <Route path="/find_id" element={<FindIdPage/>}/>
           <Route path="/find_password" element={<FindPasswordPage/>}/>
           <Route path="/:Id/detail_password" element={<DetailPassword/>}/>
@@ -45,10 +45,11 @@ function App() {
               <Route path="signup/agree_personinfo" element={<AgreePersonInfo/>}/>
               <Route path="signup/signupForm" element={<SingupForm/>}/>
 
-
+          {/* 로그인 시에서만 이동 가능한 페이지 */}
+          <Route path="/logout" element={<PrivateRoute isLogin={isLogin}><LogOut/></PrivateRoute>}/>
 
         </Routes>
-        <Header loginState={loginState}/>
+        <Header loginState={isLogin}/>
       </BrowserRouter>
     </div>
   );
