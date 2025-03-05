@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 export default function SingupForm(){
     const nav = useNavigate()
+    const [doubleCheck, setDoubleCheck] = useState(false)
     const [formData, setFormData] = useState({
         "Id":"",
         "password":"",
@@ -76,6 +77,25 @@ export default function SingupForm(){
             }
         }
      }
+
+    async function doubleCheckId(e){
+        e.preventDefault()
+        const Id = formData.Id.trim()
+        try {
+            const response = await axios.post("https://honglee.duckdns.org/commons/check-duplicating-username",{
+                "username" : Id
+            },
+        {
+            headers:{
+                "Content-Type":"application/json"
+            }
+        })
+        if (response.status === 200) setDoubleCheck(true)
+        } catch (error) {
+            setDoubleCheck(false)
+        }
+     }
+
      function onChange(e){
         const {name,value} = e.target
         setFormData({
@@ -91,6 +111,8 @@ export default function SingupForm(){
                 <div className="Id">
                     <label>아이디</label><br/>
                     <input type="text" name="Id" id="" placeholder="아이디 입력(5~11자)" onChange={onChange} value={formData.Id}/>
+                    {!doubleCheck?"":<p>{doubleCheck?"사용가능한 아이디 입니다":"이미 사용중인 아이디입니다"}</p>}
+                    <button onClick={doubleCheckId}>중복 확인</button>
                 </div>
                 <div>
                     <label>비밀번호</label><br/>

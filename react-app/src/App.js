@@ -1,20 +1,21 @@
 import {BrowserRouter,Route,Routes} from "react-router-dom"
-import Header from "./component/Header";
-import Login from "./component/Login";
+import Footer from "./component/Footer";
+import Login from "./component/login/Login";
 import HomePage from "./component/HomePage";
-import FindIdPage from "./component/FindIdPage";
-import FindPasswordPage from "./component/FindPasswordPage";
-import DetailPassword from "./component/DetailPassword";
-import KakaoLogin from "./component/KakaoLogin";
-import SingupPage from "./component/SingupPage";
+import FindPasswordPage from "./component/login/FindPasswordPage";
+import FindIdPage from "./component/login/FindIdPage";
+import DetailPassword from "./component/login/DetailPassword";
+import KakaoLogin from "./component/login/KakaoLogin";
+import SingupPage from "./component/login/SingupPage";
 import AgreeStore from "./component/agree/AgreeStore";
 import AgreeAd from "./component/agree/AgreeAd";
 import AgreeMarketing from "./component/agree/AgreeMarketing";
-import SingupForm from "./component/SignupForm";
 import AgreePersonInfo from "./component/agree/AgreePersonInfo";
-import LogOut from "./component/Logout";
+import SingupForm from "./component/login/SignupForm";
+import LogOut from "./component/login/Logout";
 import { useEffect, useState } from "react";
 import PrivateRoute from "./hook/PrivateRoute";
+import MyPage from "./component/myMenu/MyPage";
 
 function App() {
   const [isLogin, setLogin] = useState(false)
@@ -45,11 +46,13 @@ function App() {
               <Route path="signup/agree_personinfo" element={<AgreePersonInfo/>}/>
               <Route path="signup/signupForm" element={<SingupForm/>}/>
 
+          <Route path="/my_page" element={<MyPage loginState={isLogin} />} />
+
+          
           {/* 로그인 시에서만 이동 가능한 페이지 */}
           <Route path="/logout" element={<PrivateRoute isLogin={isLogin}><LogOut/></PrivateRoute>}/>
-
         </Routes>
-        <Header loginState={isLogin}/>
+        <Footer/>
       </BrowserRouter>
     </div>
   );
