@@ -53,7 +53,7 @@ export default function Login({setLogin}){
           <label>ID</label>
         </div>
         <div>
-          <input type="text" placeholder="id를 입력해주세요요" ref={refId}/>
+          <input type="text" placeholder="id를 입력해주세요" ref={refId}/>
         </div>
       </div>
       <div className="password">
@@ -67,7 +67,7 @@ export default function Login({setLogin}){
       <button>Login</button>
     </form>
       <button onClick={kakaoLogin}>카카오 로그인</button>
-      <button>google 로그인인</button><br/>
+      <button>google 로그인</button><br/>
     <Link to="/find_id">아이디 찾기</Link> | <Link to="/find_password">비밀번호 찾기</Link><br/>
     <Link to="/signup">회원 가입</Link>
 

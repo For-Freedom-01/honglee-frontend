@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 export default function SingupForm(){
     const nav = useNavigate()
     const [doubleCheck, setDoubleCheck] = useState(false)
+    const [disCheck, setDisCheck] = useState(false)
     const [formData, setFormData] = useState({
         "Id":"",
         "password":"",
@@ -12,6 +13,14 @@ export default function SingupForm(){
         "email":"",
         "friend":""
     })
+    const [passwordCheck, setPasswordCheck] = useState(null)
+    function handlePasswordCheck(){
+        if (formData.password == formData.passwordCheck){
+            setPasswordCheck(true)
+        } else {
+            setPasswordCheck(false)
+        }
+    }
 
     // const [option, setOption] = useState({
     //     "all":false,
@@ -43,9 +52,8 @@ export default function SingupForm(){
         return !!(
             formData.email &&
             formData.Id && 
-            formData.password && 
-            formData.passwordCheck &&
-            formData.password === formData.passwordCheck
+            passwordCheck &&
+            doubleCheck
         )
      }
      async function handling(e){
@@ -80,6 +88,7 @@ export default function SingupForm(){
 
     async function doubleCheckId(e){
         e.preventDefault()
+        setDisCheck(true)
         const Id = formData.Id.trim()
         try {
             const response = await axios.post("https://honglee.duckdns.org/commons/check-duplicate-username",{
@@ -111,13 +120,14 @@ export default function SingupForm(){
                 <div className="Id">
                     <label>아이디</label><br/>
                     <input type="text" name="Id" id="" placeholder="아이디 입력(5~11자)" onChange={onChange} value={formData.Id}/>
-                    {!doubleCheck?"":<p>{doubleCheck?"사용가능한 아이디 입니다":"이미 사용중인 아이디입니다"}</p>}
+                    {!disCheck?"":<p>{doubleCheck?"사용가능한 아이디 입니다":"이미 사용중인 아이디입니다"}</p>}
                     <button onClick={doubleCheckId}>중복 확인</button>
                 </div>
-                <div>
+                <div >
                     <label>비밀번호</label><br/>
                     <input type="password" name="password" placeholder="비밀번호(숫자, 영문, 특수문자 조합 최소 8자)" onChange={onChange} value={formData.password} /><br/>
-                    <input type="password" name="passwordCheck" placeholder="비밀번호 확인" onChange={onChange} value={formData.passwordCheck} />
+                    <input type="password" name="passwordCheck" placeholder="비밀번호 확인" onChange={onChange} value={formData.passwordCheck} onBlur={handlePasswordCheck} />
+                    {passwordCheck===false && <p>비밀번호가 일치하지 않습니다</p>}
                 </div>
                 <div className="password">
                     <label >이메일</label><br/>
