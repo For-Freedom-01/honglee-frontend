@@ -82,7 +82,7 @@ export default function SingupForm(){
         e.preventDefault()
         const Id = formData.Id.trim()
         try {
-            const response = await axios.post("https://honglee.duckdns.org/commons/check-duplicating-username",{
+            const response = await axios.post("https://honglee.duckdns.org/commons/check-duplicate-username",{
                 "username" : Id
             },
         {
